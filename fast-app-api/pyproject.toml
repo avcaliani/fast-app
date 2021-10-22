@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "fast-app-api"
+version = "0.0.1"
+description = "Fast App - API"
+authors = ["Anthony Caliani <avcaliani.it@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.70.0"
+dynaconf = "^3.1.7"
+
+[tool.poetry.dev-dependencies]
+uvicorn = {extras = ["standard"], version = "^0.15.0"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
