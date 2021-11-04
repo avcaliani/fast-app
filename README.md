@@ -19,7 +19,7 @@ SECRET = '🤫'
 " > .secrets.toml
 ```
 
-Finally start the API server.
+Finally, start the API server.
 
 > `APP_ENV` is an environment variable used by Dynaconf to indicate which profile should be used.
 
@@ -35,6 +35,6 @@ After executing the previous command you are ready to access the API resources.
 #### Example
 
 ```bash
-curl -X 'GET' 'http://127.0.0.1:8000/'
+curl -X 'GET' 'http://127.0.0.1:8000/emoji'
 # {"lucky_emojis":["🫐","🍈","🍊","🍋","🥭","🍐"],"secret":"🚀","consulted_at":"2021-10-22T11:36:48.533441"}
 ```
