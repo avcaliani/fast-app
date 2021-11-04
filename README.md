@@ -1,15 +1,40 @@
 <img src=".docs/logo.png" width="64px" align="right"/>
 
-# Fast App
+# Fast App - API
 
 ![License](https://img.shields.io/github/license/avcaliani/fast-app?logo=apache&color=lightseagreen)
+![#](https://img.shields.io/badge/python-3.10.x-yellow.svg)
 
+## Quick Start
 
-Project description soon...
+Before starting, create a Dynaconf secrets file as follows.
 
-### Components
- - [Fast App - API](fast-app-api/README.md)
+```bash
+echo "
+[dev]
+SECRET = '🚀'
 
----
+[prod]
+SECRET = '🤫'
+" > .secrets.toml
+```
 
-_The logo was designed by [strokeicon](https://www.iconfinder.com/strokeicon) from [IconFinder](https://www.iconfinder.com/icons/2191531/best_fast_flash_good_light_speed_icon)._
+Finally start the API server.
+
+> `APP_ENV` is an environment variable used by Dynaconf to indicate which profile should be used.
+
+```bash
+APP_ENV=dev uvicorn main:app --reload
+```
+
+After executing the previous command you are ready to access the API resources.
+
+- Docs: `http://127.0.0.1:8000/docs`
+- Endpoints: `http://127.0.0.1:8000`
+
+#### Example
+
+```bash
+curl -X 'GET' 'http://127.0.0.1:8000/'
+# {"lucky_emojis":["🫐","🍈","🍊","🍋","🥭","🍐"],"secret":"🚀","consulted_at":"2021-10-22T11:36:48.533441"}
+```
