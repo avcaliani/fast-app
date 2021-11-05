@@ -1,5 +1,6 @@
 from datetime import datetime
 from random import choices, randint
+from typing import Optional
 
 from fastapi import FastAPI
 
@@ -18,9 +19,9 @@ async def root():
 
 
 @app.get('/emoji')
-async def emojis():
+async def emojis(limit: Optional[int] = None):
     return {
-        'lucky_emojis': choices(EMOJIS, k=randint(1, len(EMOJIS))),
+        'lucky_emojis': choices(EMOJIS, k=limit if limit else randint(1, len(EMOJIS))),
         'secret': SECRET,
         'consulted_at': datetime.utcnow()
     }
