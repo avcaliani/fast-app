@@ -4,7 +4,9 @@ from typing import Optional
 
 from fastapi import FastAPI
 
+from app import db
 from app.enums import Mood
+from app.models import User
 from config import settings
 
 SECRET = settings.SECRET
@@ -47,5 +49,29 @@ async def mood(item: Mood):
     return {
         'message': messages.get(item),
         'item': item,
+        'consulted_at': datetime.utcnow()
+    }
+
+
+@app.post('/user')
+async def create_user(user: User):
+    return {
+        'user': db.create(user),
+        'consulted_at': datetime.utcnow()
+    }
+
+
+@app.get('/user/{user_id}')
+async def get_user(user_id: str):
+    return {
+        'user': db.get(user_id),
+        'consulted_at': datetime.utcnow()
+    }
+
+
+@app.put('/user/{user_id}')
+async def get_user(user_id: str, user: User):
+    return {
+        'user': db.update(user_id, user),
         'consulted_at': datetime.utcnow()
     }
