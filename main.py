@@ -2,7 +2,7 @@ from datetime import datetime
 from random import choices, randint
 from typing import Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
 from app import db
 from app.enums import Mood
@@ -40,14 +40,17 @@ async def get_emoji(item: int):
 
 
 @app.get('/mood/{item}')
-async def mood(item: Mood):
+async def mood(
+        item: Mood,
+        text_mode: Optional[str] = Query(None, min_length=4, max_length=8, regex=r'CAPS(LOCK)?')):
     messages = {
         Mood.happy: 'If in doubt, Meriadoc, always follow your nose!',
         Mood.angry: 'You must trust yourself. Trust your own strength.',
         Mood.insightful: 'Even the very wise cannot see all ends.',
     }
+    msg = messages.get(item)
     return {
-        'message': messages.get(item),
+        'message': msg.upper() if text_mode in ['CAPS', 'CAPSLOCK'] else msg,
         'item': item,
         'consulted_at': datetime.utcnow()
     }
