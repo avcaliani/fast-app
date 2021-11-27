@@ -34,3 +34,10 @@ def update(user_id: str, new_data: User):
     if new_data.balance:
         user.balance = new_data.balance
     return user
+
+
+def delete(user_id: str):
+    if user_id not in USERS:
+        raise RuntimeError(f'User {user_id} not found!')
+    del USERS[user_id]
+    return user_id

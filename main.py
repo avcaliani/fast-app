@@ -2,7 +2,7 @@ from datetime import datetime
 from random import choices, randint
 from typing import Optional
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, HTTPException
 
 from app import db
 from app.enums import Mood
@@ -78,3 +78,14 @@ async def get_user(user_id: str, user: User):
         'user': db.update(user_id, user),
         'consulted_at': datetime.utcnow()
     }
+
+
+@app.delete('/user/{user_id}')
+async def delete_user(user_id: str):
+    try:
+        return {
+            'user': db.delete(user_id),
+            'consulted_at': datetime.utcnow()
+        }
+    except RuntimeError as ex:
+        return HTTPException(status_code=404, detail=str(ex))
