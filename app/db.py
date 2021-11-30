@@ -1,14 +1,17 @@
 from datetime import datetime
+from typing import List, Dict, Union, Optional
 from uuid import uuid4
 
 from app.models import User
 
 # TODO: Save to a database in the future...
-USERS = {}
+USERS: Dict[str, User] = {}
 
 
-def get(user_id: str):
+def get(user_id: Optional[str] = None) -> Union[User, List[User]]:
     print(f'Users Available: {len(USERS)}')
+    if not user_id:
+        return list(USERS.values())
     return USERS.get(user_id)
 
 

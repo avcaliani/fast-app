@@ -56,15 +56,15 @@ async def mood(
     }
 
 
-@app.post('/user')
-async def create_user(user: User):
+@app.get('/users')
+async def get_users():
     return {
-        'user': db.create(user),
+        'users': db.get(),
         'consulted_at': datetime.utcnow()
     }
 
 
-@app.get('/user/{user_id}')
+@app.get('/users/{user_id}')
 async def get_user(user_id: str):
     return {
         'user': db.get(user_id),
@@ -72,7 +72,15 @@ async def get_user(user_id: str):
     }
 
 
-@app.put('/user/{user_id}')
+@app.post('/users', status_code=201)
+async def create_user(user: User):
+    return {
+        'user': db.create(user),
+        'consulted_at': datetime.utcnow()
+    }
+
+
+@app.put('/users/{user_id}')
 async def get_user(user_id: str, user: User):
     return {
         'user': db.update(user_id, user),
@@ -80,7 +88,7 @@ async def get_user(user_id: str, user: User):
     }
 
 
-@app.delete('/user/{user_id}')
+@app.delete('/users/{user_id}')
 async def delete_user(user_id: str):
     try:
         return {
@@ -88,4 +96,4 @@ async def delete_user(user_id: str):
             'consulted_at': datetime.utcnow()
         }
     except RuntimeError as ex:
-        return HTTPException(status_code=404, detail=str(ex))
+        raise HTTPException(status_code=404, detail=str(ex))
