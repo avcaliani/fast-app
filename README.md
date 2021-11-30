@@ -38,3 +38,9 @@ After executing the previous command you are ready to access the API resources.
 curl -X 'GET' 'http://127.0.0.1:8000/emoji'
 # {"lucky_emojis":["🫐","🍈","🍊","🍋","🥭","🍐"],"secret":"🚀","consulted_at":"2021-10-22T11:36:48.533441"}
 ```
+
+### References
+ - [Fast API: docs](https://fastapi.tiangolo.com/)
+ - [pydantic: docs](https://pydantic-docs.helpmanual.io/)
+
+> 💡 Fast API has an awesome documentation!
