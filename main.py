@@ -14,6 +14,13 @@ EMOJIS = settings.EMOJIS
 
 app = FastAPI()
 
+# TODO List
+#   - Security (JWT)
+#   - Middlewares
+#   - Database (SQL or NoSQL)
+#   - Multiple Modules
+#   - Static Files
+#   - Unit Tests
 
 @app.get('/')
 async def root():
