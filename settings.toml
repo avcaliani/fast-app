@@ -1,3 +1,7 @@
+[default]
+TOKEN_ALGORITHM = "HS256"
+TOKEN_EXPIRE_MINUTES = 60
+
 [dev]
 EMOJIS = ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🫐', '🍈', '🍒', '🍑', '🥭', '🍍', '🥥', '🥝', '🍅']
 

@@ -2,11 +2,12 @@ from datetime import datetime
 from random import choices, randint
 from typing import Optional
 
-from fastapi import FastAPI, Query, HTTPException
+from fastapi import Depends, FastAPI, Query, HTTPException
 
-from app import db
+from app import db, dependencies
 from app.enums import Mood
-from app.models import User
+from app.models import User, Login
+from app.utils import auth
 from config import settings
 
 SECRET = settings.SECRET
@@ -14,17 +15,30 @@ EMOJIS = settings.EMOJIS
 
 app = FastAPI()
 
+
 # TODO List
-#   - Security (JWT)
 #   - Middlewares
 #   - Database (SQL or NoSQL)
 #   - Multiple Modules
 #   - Static Files
 #   - Unit Tests
+#   - Logging
 
 @app.get('/')
 async def root():
     return {'api': 'fast-app', 'version': '0.0.1', 'consulted_at': datetime.utcnow()}
+
+
+@app.post("/auth")
+async def get_token(login: Login):
+    user = db.get_by_email(login.username)
+    password_ok = auth.check_password(plain=login.password, hashed=user.password)
+    if not user or not password_ok:
+        raise auth.EXCEPTION_INVALID_CREDENTIALS
+    return auth.create_token(
+        subject=user.email,
+        mood=user.mood.value if user.mood else ''
+    )
 
 
 @app.get('/emoji')
@@ -65,10 +79,18 @@ async def mood(
 
 @app.get('/users')
 async def get_users():
+    # TODO: Remove password from body!
+    # TODO: Protect other endpoints
     return {
         'users': db.get(),
         'consulted_at': datetime.utcnow()
     }
+
+
+@app.get("/users/me")
+async def who_am_i(user: User = Depends(dependencies.get_user)):
+    # TODO: Add Middleware to add consulted at.
+    return user.dict(exclude={'password'})
 
 
 @app.get('/users/{user_id}')

@@ -11,6 +11,9 @@ Before starting, create a Dynaconf secrets file as follows.
 
 ```bash
 echo "
+[default]
+TOKEN_SECRET_KEY = '$(openssl rand -hex 32)'
+
 [dev]
 SECRET = '🚀'
 
