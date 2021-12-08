@@ -5,6 +5,7 @@ from uuid import uuid4
 
 from app.enums import Mood
 from app.models import User
+from app.utils import auth
 
 # TODO: Save to a database in the future...
 USERS = {
@@ -38,6 +39,7 @@ def get_by_email(email: str) -> Optional[User]:
 def create(user: User) -> User:
     user_id = str(uuid4())
     user.id = user_id
+    user.password = auth.hash_password(user.password)
     USERS[user_id] = user
     print(f'New User: {user}')
     return user
