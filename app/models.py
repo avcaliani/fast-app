@@ -6,11 +6,6 @@ from pydantic import BaseModel
 from app.enums import Mood
 
 
-class Login(BaseModel):
-    username: str
-    password: str
-
-
 class User(BaseModel):
     id: Optional[str] = None
     enabled: bool = True

@@ -1,7 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.security import OAuth2PasswordRequestForm
 
-from app.models import Login
 from app.utils import auth, db
 
 router = APIRouter()
@@ -22,9 +22,19 @@ async def favicon():
 
 
 @router.post("/auth")
-async def get_token(login: Login):
-    user = db.get_by_email(login.username)
-    password_ok = auth.check_password(plain=login.password, hashed=user.password)
+async def get_token(form: OAuth2PasswordRequestForm = Depends()):
+    # Here, I'm using OAuth2PasswordRequestForm to retrieve user and password.
+    # But, let's say that you want to receive a JSON in a custom format, then
+    # you just have to change OAuth2PasswordRequestForm by your Pydantic Entity.
+    # Something like...
+    #
+    # class Login(BaseModel):
+    #     username: str
+    #     password: str
+    #
+    # async def get_token(login: Login): ...
+    user = db.get_by_email(form.username)
+    password_ok = auth.check_password(plain=form.password, hashed=user.password)
     if not user or not password_ok:
         raise auth.EXCEPTION_INVALID_CREDENTIALS
     return auth.create_token(

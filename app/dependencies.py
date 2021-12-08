@@ -3,7 +3,8 @@ from fastapi.security import OAuth2PasswordBearer
 
 from app.utils import auth, db
 
-SCHEME = OAuth2PasswordBearer(tokenUrl="token")
+# It will use "/auth" as default endpoint for authentication.
+SCHEME = OAuth2PasswordBearer(tokenUrl="auth")
 
 
 async def get_user(token: str = Depends(SCHEME)):
