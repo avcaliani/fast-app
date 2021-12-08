@@ -5,6 +5,8 @@ from typing import Optional
 
 from fastapi import Depends, FastAPI, Query, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 from app import db, dependencies
 from app.enums import Mood
@@ -20,11 +22,10 @@ app = FastAPI()
 # TODO List
 #   - Database (SQL or NoSQL)
 #   - Multiple Modules
-#   - Static Files
 #   - Unit Tests
 #   - Logging
 
-
+app.mount("/static", StaticFiles(directory="static"), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -42,9 +43,18 @@ async def add_process_time_header(request: Request, call_next):
     return response
 
 
-@app.get('/')
+@app.get('/', response_class=HTMLResponse)
 async def root():
-    return {'api': 'fast-app', 'version': '0.0.1', 'consulted_at': datetime.utcnow()}
+    with open('static/index.html', 'r', encoding='utf8') as file:
+        return HTMLResponse(
+            content=file.read().rstrip(),
+            status_code=200
+        )
+
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse('static/favicon.ico')
 
 
 @app.post("/auth")

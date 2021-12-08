@@ -32,8 +32,11 @@ APP_ENV=dev uvicorn main:app --reload
 
 After executing the previous command you are ready to access the API resources.
 
-- Docs: `http://127.0.0.1:8000/docs`
-- Endpoints: `http://127.0.0.1:8000`
+- API Home: `http://127.0.0.1:8000`
+- Swagger: `http://127.0.0.1:8000/docs`
+- ReDoc: `http://127.0.0.1:8000/redoc`
+
+![home](.docs/home.png)
 
 #### Example
 
@@ -43,7 +46,9 @@ curl -X 'GET' 'http://127.0.0.1:8000/emoji'
 ```
 
 ### References
- - [Fast API: docs](https://fastapi.tiangolo.com/)
- - [pydantic: docs](https://pydantic-docs.helpmanual.io/)
+
+- [Fast API: docs](https://fastapi.tiangolo.com/)
+- [pydantic: docs](https://pydantic-docs.helpmanual.io/)
+- [Icon made by Strokeicon from IconFinder](https://www.iconfinder.com/icons/2191531/best_fast_flash_good_light_speed_icon)
 
 > 💡 Fast API has an awesome documentation!
