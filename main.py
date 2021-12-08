@@ -6,7 +6,31 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from app import middlewares
 from app.routers import base, emoji, mood, users
 
-app = FastAPI()
+# API METADATA & DOCS
+# You don't have to fill all those fields in order to create an API.
+# For example, if you create an App like "app = FastAPI()" it will work normally.
+# Another important point is the API Docs like redoc and swagger. In my case,
+# these docs are not being protected by the API Authentication, but let's say that
+# you need that your API docs can only be accessed by authenticated users, how can you proceed?
+# In this article you will find a way to protect you API Docs...
+# https://medium.com/data-rebels/fastapi-how-to-add-basic-and-cookie-authentication-a45c85ef47d3
+#
+# MORE INFO
+# Metadata: https://fastapi.tiangolo.com/tutorial/metadata/
+app = FastAPI(
+    title="Fast App",
+    description='Fast App it is my first FastAPI app 🚀',
+    version="0.0.1",
+    contact={
+        "name": "Anthony Caliani",
+        "url": "https://github.com/avcaliani",
+        "email": "anthony@github.com",
+    },
+    license_info={
+        "name": "MIT License",
+        "url": "https://opensource.org/licenses/MIT",
+    },
+)
 
 # TODO List
 #   - Database (SQL or NoSQL)
