@@ -1,8 +1,10 @@
 from datetime import datetime
 from random import choices, randint
+from time import time
 from typing import Optional
 
-from fastapi import Depends, FastAPI, Query, HTTPException
+from fastapi import Depends, FastAPI, Query, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from app import db, dependencies
 from app.enums import Mood
@@ -15,14 +17,30 @@ EMOJIS = settings.EMOJIS
 
 app = FastAPI()
 
-
 # TODO List
-#   - Middlewares
 #   - Database (SQL or NoSQL)
 #   - Multiple Modules
 #   - Static Files
 #   - Unit Tests
 #   - Logging
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.middleware("http")
+async def add_process_time_header(request: Request, call_next):
+    start_time = time()
+    response = await call_next(request)
+    response.headers["X-Process-Time"] = str(time() - start_time)
+    return response
+
 
 @app.get('/')
 async def root():
