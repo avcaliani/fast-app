@@ -7,7 +7,16 @@
 
 ## Quick Start
 
-Before starting, create a Dynaconf secrets file as follows.
+Create your Python virtual environment...
+
+```bash
+python -m venv .venv \
+    && source .venv/bin/activate \
+    && pip install --upgrade pip \
+    && poetry install
+```
+
+Then, create a Dynaconf secrets file as follows.
 
 ```bash
 echo "

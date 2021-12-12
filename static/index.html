@@ -21,7 +21,7 @@
 
         #logo {
             width: 128px;
-            margin: 5em auto 0 auto;
+            margin: 3em auto 0 auto;
             display: block;
         }
 
@@ -63,6 +63,11 @@
         p > a:hover {
             color: #7ACED7;
         }
+
+        #clock {
+            color: #7ACED7;
+            font-size: small;
+        }
     </style>
 </head>
 
@@ -74,6 +79,7 @@
     <p>
         <a href="/docs">Swagger</a> | <a href="/redoc">ReDoc</a>
     </p>
+    <span id="clock">...</span>
 </div>
 <div id="footer">
     <a id="github" href="https://github.com/avcaliani">
@@ -86,4 +92,11 @@
 </div>
 </body>
 
+<script type="application/javascript">
+    const span = document.getElementById('clock');
+    setInterval(
+        () => span.textContent = new Date().toLocaleString().replace(",", " -"),
+        1000
+    );
+</script>
 </html>
