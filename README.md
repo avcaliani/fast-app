@@ -10,10 +10,16 @@
 Create your Python virtual environment...
 
 ```bash
+# 👇 Setting PyEnv version
+pyenv local 3.10.0
+
+# 👇 Virtual Environment
 python -m venv .venv \
-    && source .venv/bin/activate \
-    && pip install --upgrade pip \
-    && poetry install
+  && source .venv/bin/activate \
+  && python -m pip install --upgrade pip
+
+# 👇 Dependencies
+make install
 ```
 
 Then, create a Dynaconf secrets file as follows.
@@ -22,9 +28,7 @@ Then, create a Dynaconf secrets file as follows.
 echo "
 [default]
 TOKEN_SECRET_KEY = '$(openssl rand -hex 32)'
-
-[dev]
-SECRET = '🚀'
+SECRET = '🚀'  # Dev Secret
 
 [prod]
 SECRET = '🤫'
@@ -47,17 +51,31 @@ After executing the previous command you are ready to access the API resources.
 
 ![home](.docs/home.png)
 
-#### Example
+### Example
+
+Response **OK**...
 
 ```bash
 curl -X 'GET' 'http://127.0.0.1:8000/emoji'
-# {"lucky_emojis":["🫐","🍈","🍊","🍋","🥭","🍐"],"secret":"🚀","consulted_at":"2021-10-22T11:36:48.533441"}
+```
+
+```json
+{
+  "lucky_emojis": [
+    "🫐",
+    "🥭"
+  ],
+  "secret": "🚀",
+  "consulted_at": "2021-10-22T11:36:48.533441"
+}
 ```
 
 ### References
 
 - [Fast API: docs](https://fastapi.tiangolo.com/)
 - [pydantic: docs](https://pydantic-docs.helpmanual.io/)
+- [Poetry CLI: docs](https://python-poetry.org/docs/cli/)
+- [pre-commit: docs](https://pre-commit.com/)
 - [Icon made by Strokeicon from IconFinder](https://www.iconfinder.com/icons/2191531/best_fast_flash_good_light_speed_icon)
 
 > 💡 Fast API has an awesome documentation!
