@@ -1,6 +1,6 @@
 import random
-from datetime import datetime, date
-from typing import List, Union, Optional
+from datetime import date, datetime
+from typing import Optional, Union
 from uuid import uuid4
 
 from app.enums import Mood
@@ -9,21 +9,21 @@ from app.utils import auth
 
 # TODO: Save to a database in the future...
 USERS = {
-    '8a166a1c-d0ca-46e6-ad16-ac953c9011a7': User(
-        id='8a166a1c-d0ca-46e6-ad16-ac953c9011a7',
-        name='Bart Simpson',
-        email='bart@github.com',
+    "8a166a1c-d0ca-46e6-ad16-ac953c9011a7": User(
+        id="8a166a1c-d0ca-46e6-ad16-ac953c9011a7",
+        name="Bart Simpson",
+        email="bart@github.com",
         birthdate=date(1997, 4, 9),
         mood=Mood.happy,
-        balance=round(random.uniform(1., 2) * 1000, 2),
+        balance=round(random.uniform(1.0, 2) * 1000, 2),
         # Password = '12345678'
-        password='$2b$12$g2QT3pQPL.Mfh424k/j4r.tmjDrK623jlEw3ftjypA5eWCjGCeVPi',
+        password="$2b$12$g2QT3pQPL.Mfh424k/j4r.tmjDrK623jlEw3ftjypA5eWCjGCeVPi",
     )
 }
 
 
-def get(user_id: Optional[str] = None) -> Union[User, List[User]]:
-    print(f'Users Available: {len(USERS)}')
+def get(user_id: Optional[str] = None) -> Union[User, list[User]]:
+    print(f"Users Available: {len(USERS)}")
     if not user_id:
         return list(USERS.values())
     return USERS.get(user_id)
@@ -41,7 +41,7 @@ def create(user: User) -> User:
     user.id = user_id
     user.password = auth.hash_password(user.password)
     USERS[user_id] = user
-    print(f'New User: {user}')
+    print(f"New User: {user}")
     return user
 
 
@@ -63,6 +63,6 @@ def update(user_id: str, new_data: User):
 
 def delete(user_id: str):
     if user_id not in USERS:
-        raise RuntimeError(f'User {user_id} not found!')
+        raise RuntimeError(f"User {user_id} not found!")
     del USERS[user_id]
     return user_id

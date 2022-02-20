@@ -9,9 +9,9 @@ SCHEME = OAuth2PasswordBearer(tokenUrl="auth")
 
 async def get_user(token: str = Depends(SCHEME)):
     payload = auth.decode(token)
-    if not payload or 'sub' not in payload:
+    if not payload or "sub" not in payload:
         raise auth.EXCEPTION_INVALID_CREDENTIALS
-    user = db.get_by_email(email=payload.get('sub'))
+    user = db.get_by_email(email=payload.get("sub"))
     if user is None:
         raise auth.EXCEPTION_INVALID_CREDENTIALS
     if not user.enabled:

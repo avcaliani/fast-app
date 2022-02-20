@@ -14,9 +14,9 @@ EXPIRE_MINUTES = settings.TOKEN_EXPIRE_MINUTES
 EXCEPTION_INVALID_CREDENTIALS = HTTPException(
     status_code=401,
     detail="Invalid credentials!",
-    headers={'WWW-Authenticate': 'Bearer'},
+    headers={"WWW-Authenticate": "Bearer"},
 )
-CONTEXT = CryptContext(schemes=['bcrypt'], deprecated='auto')
+CONTEXT = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def hash_password(password: str) -> str:
@@ -28,19 +28,12 @@ def check_password(plain: str, hashed: str) -> bool:
 
 
 def create_token(subject: str, mood: str):
-    data = {
-        'sub': subject,
-        'mood': mood,
-        'exp': datetime.utcnow() + timedelta(minutes=EXPIRE_MINUTES)
-    }
-    return {
-        'token': jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM),
-        "token_type": "bearer"
-    }
+    data = {"sub": subject, "mood": mood, "exp": datetime.utcnow() + timedelta(minutes=EXPIRE_MINUTES)}
+    return {"token": jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM), "token_type": "bearer"}
 
 
 def decode(token: str) -> Optional[dict]:
     try:
         return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
     except JWTError as ex:
-        raise HTTPException(status_code=401, detail=f'Invalid JWT Token! Ex: {ex}')
+        raise HTTPException(status_code=401, detail=f"Invalid JWT Token! Ex: {ex}")

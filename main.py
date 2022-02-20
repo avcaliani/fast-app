@@ -19,7 +19,7 @@ from app.routers import base, emoji, mood, users
 # Metadata: https://fastapi.tiangolo.com/tutorial/metadata/
 app = FastAPI(
     title="Fast App",
-    description='Fast App it is my first FastAPI app 🚀',
+    description="Fast App it is my first FastAPI app 🚀",
     version="0.0.1",
     contact={
         "name": "Anthony Caliani",
@@ -43,7 +43,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # 👇 Middlewares
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
