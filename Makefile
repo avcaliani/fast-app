@@ -24,8 +24,13 @@ update-deps:
 test:
 	poetry run pytest -sx
 
+run:
+	# APP_ENV is an environment variable used by Dynaconf
+	# to indicate which profile should be used.
+	APP_ENV=dev uvicorn main:app --log-config "resources/log-config.yml" --reload
+
 deploy:
 	git tag "v$(NEW_VERSION)"
 	git push origin "v$(NEW_VERSION)"
 
-.PHONY: info install update-deps test deploy
+.PHONY: info install update-deps test run deploy
