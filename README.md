@@ -76,6 +76,7 @@ curl -X 'GET' 'http://127.0.0.1:8000/emoji'
 - [pydantic: docs](https://pydantic-docs.helpmanual.io/)
 - [Poetry CLI: docs](https://python-poetry.org/docs/cli/)
 - [pre-commit: docs](https://pre-commit.com/)
+- [MongoDB: Quick Start FastAPI](https://www.mongodb.com/developer/quickstart/python-quickstart-fastapi/)
 - [Icon made by Strokeicon from IconFinder](https://www.iconfinder.com/icons/2191531/best_fast_flash_good_light_speed_icon)
 
 > 💡 Fast API has an awesome documentation!
