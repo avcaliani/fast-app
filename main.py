@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from app import middlewares
-from app.routers import base, emoji, mood, users
+from app.routers import base, emoji, mood, user
 
 # API METADATA & DOCS
 # You don't have to fill all those fields in order to create an API.
@@ -54,4 +54,4 @@ app.add_middleware(BaseHTTPMiddleware, dispatch=middlewares.add_process_time_hea
 app.include_router(base.router)
 app.include_router(emoji.router)
 app.include_router(mood.router)
-app.include_router(users.router)
+app.include_router(user.router)

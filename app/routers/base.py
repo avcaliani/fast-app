@@ -2,7 +2,8 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.utils import auth, db
+from app.services import user as service
+from app.utils import auth
 
 router = APIRouter()
 
@@ -30,8 +31,8 @@ async def get_token(form: OAuth2PasswordRequestForm = Depends()):
     #     password: str
     #
     # async def get_token(login: Login): ...
-    user = db.get_by_email(form.username)
-    password_ok = auth.check_password(plain=form.password, hashed=user.password)
+    user = await service.find(email=form.username)
+    password_ok = auth.check_password(plain=form.password, hashed=user.get("password"))
     if not user or not password_ok:
         raise auth.EXCEPTION_INVALID_CREDENTIALS
-    return auth.create_token(subject=user.email, mood=user.mood.value if user.mood else "")
+    return auth.create_token(subject=user.get("email"), mood=user.get("mood", ""))
