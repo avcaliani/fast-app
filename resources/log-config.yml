@@ -1,0 +1,20 @@
+# More options at...
+# https://www.uvicorn.org/settings/#logging
+# https://docs.python.org/3/library/logging.config.html#logging-config-dictschema
+version: 1
+disable_existing_loggers: false
+formatters:
+  default:
+    "()": "uvicorn.logging.DefaultFormatter"
+    fmt: "%(levelprefix)s %(asctime)s | %(message)s"
+    datefmt: "%Y-%m-%d %H:%M:%S"
+handlers:
+  default:
+    formatter: "default"
+    class: "logging.StreamHandler"
+    stream: "ext://sys.stdout"
+loggers:
+  root:
+    handlers:
+      - "default"
+    level: "INFO"
