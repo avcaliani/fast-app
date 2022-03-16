@@ -38,7 +38,7 @@ repos:
       - id: python-safety-dependencies-check
 
   - repo: https://github.com/IamTheFij/docker-pre-commit
-    rev: v2.0.1
+    rev: v2.1.0
     hooks:
       - id: hadolint
         args: [ "--ignore", "DL3008", "--ignore", "DL4006" , "--ignore", "DL3013" ]
@@ -78,7 +78,7 @@ repos:
         args: [ --add-ignore=D1, -e ]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.31.0
+    rev: v2.31.1
     hooks:
       - id: pyupgrade
         args: [ --py39-plus ]
