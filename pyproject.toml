@@ -24,7 +24,7 @@ omit = ["*/dependencies.py", "*/enums.py", "*/middlewares.py", "*/models.py"]
 
 [tool.poetry]
 name = "fast-app-api"
-version = "0.0.1"
+version = "1"
 description = "Fast App - API"
 authors = ["Anthony Caliani <avcaliani.it@gmail.com>"]
 license = "MIT"
@@ -36,6 +36,7 @@ dynaconf = "^3.1.7"
 python-jose = { extras = ["cryptography"], version = "^3.3.0" }
 passlib = { extras = ["bcrypt"], version = "^1.7.4" }
 python-multipart = "^0.0.5"
+motor = "^2.5.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.17.0"
