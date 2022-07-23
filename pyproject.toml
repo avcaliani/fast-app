@@ -22,6 +22,11 @@ exclude_lines = ["nocover"]
 show_missing = true
 omit = ["*/dependencies.py", "*/enums.py", "*/middlewares.py", "*/models.py"]
 
+[tool.skjold]
+sources = ["pypa"]
+report_only = true
+verbose = true
+
 [tool.poetry]
 name = "fast-app-api"
 version = "1"

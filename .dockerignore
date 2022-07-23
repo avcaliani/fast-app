@@ -1,0 +1,25 @@
+# Python
+venv
+.venv
+.python-version
+.pytest_cache
+.coverage
+__pycache__/
+
+# Env
+.env
+
+# IDEs
+.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Other Stuff
+tests/
+.gitlab-ci.yml
+.pre-commit-config.yaml
+docker-compose.yml
+README.md

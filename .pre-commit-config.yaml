@@ -40,7 +40,7 @@ repos:
       - id: hadolint-docker
         args: [ "--ignore", "DL3008", "--ignore", "DL4006" , "--ignore", "DL3013", "--ignore", "DL3009", "--ignore", "DL3015", "--ignore", "SC1072" ]
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.2.0
+    rev: v1.3.0
     hooks:
       - id: detect-secrets
         exclude: "poetry.lock|.*.ipynb"
@@ -68,7 +68,7 @@ repos:
         additional_dependencies: [ "toml" ]
         args: [ --add-ignore=D1, -e ]
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.37.1
+    rev: v2.37.2
     hooks:
       - id: pyupgrade
         args: [ --py37-plus ]
